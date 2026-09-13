@@ -2,7 +2,7 @@
 /**
  * ZarinPal API client.
  *
- * @package Easy_Invoice_For_Zarinpal
+ * @package Tahanoa_Invoice_Links_For_Zarinpal
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -104,7 +104,7 @@ final class EZINV_Gateway {
 	private static function merchant_id() {
 		$merchant_id = trim( (string) get_option( EZINV_Settings::OPT_MERCHANT_ID, '' ) );
 		if ( 36 !== strlen( $merchant_id ) || ! preg_match( '/^[A-Za-z0-9-]{36}$/', $merchant_id ) ) {
-			return new WP_Error( 'ezinv_missing_merchant', esc_html__( 'ZarinPal Merchant ID is not configured correctly.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_missing_merchant', esc_html__( 'ZarinPal Merchant ID is not configured correctly.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 		return $merchant_id;
 	}
@@ -128,7 +128,7 @@ final class EZINV_Gateway {
 				'headers'             => array(
 					'Accept'       => 'application/json',
 					'Content-Type' => 'application/json',
-					'User-Agent'   => 'Easy-Invoice-for-ZarinPal/' . EZINV_VERSION,
+					'User-Agent'   => 'Tahanoa-Invoice-Links-for-ZarinPal/' . EZINV_VERSION,
 				),
 				'body'                => wp_json_encode( $payload ),
 				'data_format'         => 'body',
@@ -145,7 +145,7 @@ final class EZINV_Gateway {
 					'error_code' => $response->get_error_code(),
 				)
 			);
-			return new WP_Error( 'ezinv_gateway_connection', esc_html__( 'Could not connect to the payment gateway. Please try again.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_gateway_connection', esc_html__( 'Could not connect to the payment gateway. Please try again.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 
 		$http_status = (int) wp_remote_retrieve_response_code( $response );
@@ -163,7 +163,7 @@ final class EZINV_Gateway {
 				)
 			);
 			return new WP_Error( 'ezinv_gateway_http', sprintf( /* translators: %d: HTTP response status code. */
-					esc_html__( 'Payment gateway returned HTTP status %d.', 'easy-invoice-for-zarinpal' ), $http_status ) );
+					esc_html__( 'Payment gateway returned HTTP status %d.', 'tahanoa-invoice-links-for-zarinpal' ), $http_status ) );
 		}
 
 		if ( ! is_array( $data ) || JSON_ERROR_NONE !== json_last_error() ) {
@@ -176,7 +176,7 @@ final class EZINV_Gateway {
 					'http_status'=> $http_status,
 				)
 			);
-			return new WP_Error( 'ezinv_gateway_json', esc_html__( 'The payment gateway returned an invalid response.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_gateway_json', esc_html__( 'The payment gateway returned an invalid response.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 
 		$gateway_code = isset( $data['data']['code'] ) ? (int) $data['data']['code'] : 0;

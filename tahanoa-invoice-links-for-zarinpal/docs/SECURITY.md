@@ -1,6 +1,6 @@
 # Security Notes
 
-Easy Invoice for ZarinPal is designed so that browser input and callback query strings are not sufficient to create a paid invoice state.
+Tahanoa Invoice Links for ZarinPal is designed so that browser input and callback query strings are not sufficient to create a paid invoice state.
 
 ## Administrative actions
 

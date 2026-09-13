@@ -1,25 +1,25 @@
 <?php
 /**
- * Plugin Name: Easy Invoice for ZarinPal
+ * Plugin Name: Tahanoa Invoice Links for ZarinPal
  * Description: Create secure payment invoices with custom amounts or WooCommerce products and accept payments through ZarinPal.
- * Version: 1.5.8
+ * Version: 1.5.9
  * Requires at least: 6.3
  * Requires PHP: 7.4
  * Author: Taha Farzaneh
  * Author URI: https://profiles.wordpress.org/tahanoa/
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: easy-invoice-for-zarinpal
+ * Text Domain: tahanoa-invoice-links-for-zarinpal
  * Domain Path: /languages
  *
- * @package Easy_Invoice_For_Zarinpal
+ * @package Tahanoa_Invoice_Links_For_Zarinpal
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EZINV_VERSION', '1.5.8' );
+define( 'EZINV_VERSION', '1.5.9' );
 define( 'EZINV_DB_VERSION', '1.5.0' );
 define( 'EZINV_PLUGIN_FILE', __FILE__ );
 define( 'EZINV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );

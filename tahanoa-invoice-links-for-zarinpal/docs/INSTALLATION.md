@@ -1,4 +1,4 @@
-# Easy Invoice for ZarinPal — Installation & Usage
+# Tahanoa Invoice Links for ZarinPal — Installation & Usage
 
 ## Requirements
 
@@ -10,7 +10,7 @@
 ## Installation
 
 1. In WordPress, go to **Plugins → Add New → Upload Plugin**.
-2. Upload `easy-invoice-for-zarinpal-1.5.0.zip` and activate it.
+2. Upload `tahanoa-invoice-links-for-zarinpal-1.5.9.zip` and activate it.
 3. Create a normal published WordPress page, for example **Payment**.
 4. Put `[ezinv_invoice]` in that page's content.
 5. Go to **Invoices → Settings**.

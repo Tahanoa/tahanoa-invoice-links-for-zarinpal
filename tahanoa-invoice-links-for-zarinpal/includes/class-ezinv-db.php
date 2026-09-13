@@ -2,7 +2,7 @@
 /**
  * Database layer.
  *
- * @package Easy_Invoice_For_Zarinpal
+ * @package Tahanoa_Invoice_Links_For_Zarinpal
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -153,7 +153,7 @@ final class EZINV_DB {
 		);
 
 		if ( false === $inserted ) {
-			return new WP_Error( 'ezinv_db_insert_failed', esc_html__( 'The invoice could not be saved.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_db_insert_failed', esc_html__( 'The invoice could not be saved.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 
 		self::bump_cache_generation();

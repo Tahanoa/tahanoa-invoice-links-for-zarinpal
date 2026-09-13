@@ -2,7 +2,7 @@
 /**
  * Plugin settings.
  *
- * @package Easy_Invoice_For_Zarinpal
+ * @package Tahanoa_Invoice_Links_For_Zarinpal
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -116,7 +116,7 @@ final class EZINV_Settings {
 			add_settings_error(
 				self::OPT_MERCHANT_ID,
 				'ezinv_invalid_merchant',
-				esc_html__( 'Merchant ID must be exactly 36 characters and contain only letters, numbers, and hyphens.', 'easy-invoice-for-zarinpal' )
+				esc_html__( 'Merchant ID must be exactly 36 characters and contain only letters, numbers, and hyphens.', 'tahanoa-invoice-links-for-zarinpal' )
 			);
 			return (string) get_option( self::OPT_MERCHANT_ID, '' );
 		}
@@ -141,7 +141,7 @@ final class EZINV_Settings {
 			add_settings_error(
 				self::OPT_INVOICE_PAGE_ID,
 				'ezinv_invalid_invoice_page',
-				esc_html__( 'Please select a published WordPress page for the invoice shortcode.', 'easy-invoice-for-zarinpal' )
+				esc_html__( 'Please select a published WordPress page for the invoice shortcode.', 'tahanoa-invoice-links-for-zarinpal' )
 			);
 			return (int) get_option( self::OPT_INVOICE_PAGE_ID, 0 );
 		}
@@ -167,7 +167,7 @@ final class EZINV_Settings {
 			add_settings_error(
 				self::OPT_FIXED_SHIPPING,
 				'ezinv_shipping_invalid',
-				esc_html__( 'The fixed shipping amount must be a non-negative whole number.', 'easy-invoice-for-zarinpal' )
+				esc_html__( 'The fixed shipping amount must be a non-negative whole number.', 'tahanoa-invoice-links-for-zarinpal' )
 			);
 			return (int) get_option( self::OPT_FIXED_SHIPPING, 0 );
 		}
@@ -176,7 +176,7 @@ final class EZINV_Settings {
 			add_settings_error(
 				self::OPT_FIXED_SHIPPING,
 				'ezinv_shipping_too_large',
-				esc_html__( 'The fixed shipping amount is too large.', 'easy-invoice-for-zarinpal' )
+				esc_html__( 'The fixed shipping amount is too large.', 'tahanoa-invoice-links-for-zarinpal' )
 			);
 			return (int) get_option( self::OPT_FIXED_SHIPPING, 0 );
 		}
@@ -233,10 +233,10 @@ final class EZINV_Settings {
 			return;
 		}
 
-		$content = '<p>' . esc_html__( 'This site may use Easy Invoice for ZarinPal to create payment invoices. The plugin can store invoice details such as customer name, mobile number, email address, selected products, amounts, payment status, masked card number, and gateway reference ID in the site database.', 'easy-invoice-for-zarinpal' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'When a payment is initiated, the invoice amount, description, order ID, and—when provided—customer mobile number and email address are sent to ZarinPal to process the payment. The plugin does not send telemetry or analytics to the plugin author.', 'easy-invoice-for-zarinpal' ) . '</p>';
+		$content = '<p>' . esc_html__( 'This site may use Tahanoa Invoice Links for ZarinPal to create payment invoices. The plugin can store invoice details such as customer name, mobile number, email address, selected products, amounts, payment status, masked card number, and gateway reference ID in the site database.', 'tahanoa-invoice-links-for-zarinpal' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'When a payment is initiated, the invoice amount, description, order ID, and—when provided—customer mobile number and email address are sent to ZarinPal to process the payment. The plugin does not send telemetry or analytics to the plugin author.', 'tahanoa-invoice-links-for-zarinpal' ) . '</p>';
 
-		wp_add_privacy_policy_content( 'Easy Invoice for ZarinPal', wp_kses_post( $content ) );
+		wp_add_privacy_policy_content( 'Tahanoa Invoice Links for ZarinPal', wp_kses_post( $content ) );
 	}
 
 	/**
@@ -246,8 +246,8 @@ final class EZINV_Settings {
 	 * @return array
 	 */
 	public static function register_privacy_exporter( $exporters ) {
-		$exporters['easy-invoice-for-zarinpal'] = array(
-			'exporter_friendly_name' => __( 'Easy Invoice for ZarinPal invoices', 'easy-invoice-for-zarinpal' ),
+		$exporters['tahanoa-invoice-links-for-zarinpal'] = array(
+			'exporter_friendly_name' => __( 'Tahanoa Invoice Links for ZarinPal invoices', 'tahanoa-invoice-links-for-zarinpal' ),
 			'callback'               => array( __CLASS__, 'privacy_exporter' ),
 		);
 		return $exporters;
@@ -272,21 +272,21 @@ final class EZINV_Settings {
 
 		foreach ( $invoices as $invoice ) {
 			$data[] = array(
-				'group_id'    => 'easy-invoice-for-zarinpal-invoices',
-				'group_label' => __( 'Payment invoices', 'easy-invoice-for-zarinpal' ),
+				'group_id'    => 'tahanoa-invoice-links-for-zarinpal-invoices',
+				'group_label' => __( 'Payment invoices', 'tahanoa-invoice-links-for-zarinpal' ),
 				'item_id'     => 'invoice-' . (int) $invoice->id,
 				'data'        => array(
-					array( 'name' => __( 'Invoice ID', 'easy-invoice-for-zarinpal' ), 'value' => (string) (int) $invoice->id ),
-					array( 'name' => __( 'Invoice title', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->title ),
-					array( 'name' => __( 'Customer name', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->customer_name ),
-					array( 'name' => __( 'Mobile', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->mobile ),
-					array( 'name' => __( 'Email', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->email ),
-					array( 'name' => __( 'Amount (IRR)', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->amount_irr ),
-					array( 'name' => __( 'Payment status', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->status ),
-					array( 'name' => __( 'Gateway reference', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->ref_id ),
-					array( 'name' => __( 'Masked card number', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->card_pan ),
-					array( 'name' => __( 'Created at', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->created_at ),
-					array( 'name' => __( 'Paid at', 'easy-invoice-for-zarinpal' ), 'value' => (string) $invoice->paid_at ),
+					array( 'name' => __( 'Invoice ID', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) (int) $invoice->id ),
+					array( 'name' => __( 'Invoice title', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->title ),
+					array( 'name' => __( 'Customer name', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->customer_name ),
+					array( 'name' => __( 'Mobile', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->mobile ),
+					array( 'name' => __( 'Email', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->email ),
+					array( 'name' => __( 'Amount (IRR)', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->amount_irr ),
+					array( 'name' => __( 'Payment status', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->status ),
+					array( 'name' => __( 'Gateway reference', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->ref_id ),
+					array( 'name' => __( 'Masked card number', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->card_pan ),
+					array( 'name' => __( 'Created at', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->created_at ),
+					array( 'name' => __( 'Paid at', 'tahanoa-invoice-links-for-zarinpal' ), 'value' => (string) $invoice->paid_at ),
 				),
 			);
 		}
@@ -304,8 +304,8 @@ final class EZINV_Settings {
 	 * @return array
 	 */
 	public static function register_privacy_eraser( $erasers ) {
-		$erasers['easy-invoice-for-zarinpal'] = array(
-			'eraser_friendly_name' => __( 'Easy Invoice for ZarinPal customer contact data', 'easy-invoice-for-zarinpal' ),
+		$erasers['tahanoa-invoice-links-for-zarinpal'] = array(
+			'eraser_friendly_name' => __( 'Tahanoa Invoice Links for ZarinPal customer contact data', 'tahanoa-invoice-links-for-zarinpal' ),
 			'callback'             => array( __CLASS__, 'privacy_eraser' ),
 		);
 		return $erasers;
@@ -333,7 +333,7 @@ final class EZINV_Settings {
 		return array(
 			'items_removed'  => $removed > 0,
 			'items_retained' => $removed > 0,
-			'messages'       => $removed > 0 ? array( __( 'Customer name, mobile, and email were erased. Financial transaction records were retained.', 'easy-invoice-for-zarinpal' ) ) : array(),
+			'messages'       => $removed > 0 ? array( __( 'Customer name, mobile, and email were erased. Financial transaction records were retained.', 'tahanoa-invoice-links-for-zarinpal' ) ) : array(),
 			'done'           => true,
 		);
 	}

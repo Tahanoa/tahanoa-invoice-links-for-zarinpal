@@ -1,9 +1,9 @@
-=== Easy Invoice for ZarinPal ===
+=== Tahanoa Invoice Links for ZarinPal ===
 Contributors: tahanoa
 Tags: invoice, payment, zarinpal, payment-link, ecommerce
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 1.5.8
+Stable tag: 1.5.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Create secure payment-link invoices with custom amounts or WooCommerce products 
 
 == Description ==
 
-Easy Invoice for ZarinPal lets a WordPress administrator create a payment invoice, copy its public link, and send that link to a customer. The customer sees the invoice inside a normal WordPress page, so the active theme remains responsible for the header, footer, trust badges, navigation, and other site elements.
+Tahanoa Invoice Links for ZarinPal lets a WordPress administrator create a payment invoice, copy its public link, and send that link to a customer. The customer sees the invoice inside a normal WordPress page, so the active theme remains responsible for the header, footer, trust badges, navigation, and other site elements.
 
 The plugin works without WooCommerce for manual-amount invoices. If WooCommerce is active, administrators can search products by name or SKU, choose quantities, and add those products to an invoice. Product prices are read again on the server when the invoice is created and saved as a snapshot, so browser-submitted prices are not trusted and later catalog price changes do not alter an existing invoice.
 
@@ -62,8 +62,8 @@ WooCommerce currency is supported directly when it is IRR (Rial) or a Toman-styl
 
 == Installation ==
 
-1. Upload the `easy-invoice-for-zarinpal` folder to `/wp-content/plugins/`, or upload the plugin ZIP from **Plugins > Add New > Upload Plugin**.
-2. Activate **Easy Invoice for ZarinPal**.
+1. Upload the `tahanoa-invoice-links-for-zarinpal` folder to `/wp-content/plugins/`, or upload the plugin ZIP from **Plugins > Add New > Upload Plugin**.
+2. Activate **Tahanoa Invoice Links for ZarinPal**.
 3. Create a normal WordPress page, for example `/payment/`.
 4. Put the shortcode `[ezinv_invoice]` in that page. The previous `[ezi_invoice]` shortcode remains supported for migration compatibility.
 5. Go to **Invoices > Settings**.
@@ -113,6 +113,11 @@ Depending on invoice fields used, the WordPress database can store customer name
 Not by default. In **Invoices > Settings**, administrators can explicitly enable deletion of plugin settings and invoice tables when the plugin is deleted.
 
 == Changelog ==
+
+= 1.5.9 =
+
+* Renamed the plugin to Tahanoa Invoice Links for ZarinPal.
+* Updated the plugin slug, text domain, translation files, and documentation for the new WordPress.org permalink.
 
 = 1.5.8 =
 

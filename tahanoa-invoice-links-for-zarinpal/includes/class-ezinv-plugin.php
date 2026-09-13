@@ -2,7 +2,7 @@
 /**
  * Main plugin bootstrap.
  *
- * @package Easy_Invoice_For_Zarinpal
+ * @package Tahanoa_Invoice_Links_For_Zarinpal
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

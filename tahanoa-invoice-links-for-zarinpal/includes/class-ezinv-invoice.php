@@ -2,7 +2,7 @@
 /**
  * Public invoice rendering and payment flow.
  *
- * @package Easy_Invoice_For_Zarinpal
+ * @package Tahanoa_Invoice_Links_For_Zarinpal
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -46,12 +46,12 @@ final class EZINV_Invoice {
 		wp_enqueue_style( 'ezinv-public', EZINV_PLUGIN_URL . 'public/css/public.css', array(), EZINV_VERSION );
 
 		if ( '' === $token ) {
-			return '<div class="ezinv-alert ezinv-alert-error">' . esc_html__( 'The invoice link is invalid.', 'easy-invoice-for-zarinpal' ) . '</div>';
+			return '<div class="ezinv-alert ezinv-alert-error">' . esc_html__( 'The invoice link is invalid.', 'tahanoa-invoice-links-for-zarinpal' ) . '</div>';
 		}
 
 		$invoice = EZINV_DB::get_by_token( $token );
 		if ( ! $invoice ) {
-			return '<div class="ezinv-alert ezinv-alert-error">' . esc_html__( 'The invoice was not found or has been removed.', 'easy-invoice-for-zarinpal' ) . '</div>';
+			return '<div class="ezinv-alert ezinv-alert-error">' . esc_html__( 'The invoice was not found or has been removed.', 'tahanoa-invoice-links-for-zarinpal' ) . '</div>';
 		}
 
 		$business_name = (string) get_option( EZINV_Settings::OPT_BUSINESS_NAME, get_bloginfo( 'name' ) );
@@ -66,7 +66,7 @@ final class EZINV_Invoice {
 				<div>
 					<div class="ezinv-public-business"><?php echo esc_html( $business_name ); ?></div>
 					<div class="ezinv-public-number"><?php echo esc_html( sprintf( /* translators: %d: invoice ID. */
-					__( 'Invoice #%d', 'easy-invoice-for-zarinpal' ), (int) $invoice->id ) ); ?></div>
+					__( 'Invoice #%d', 'tahanoa-invoice-links-for-zarinpal' ), (int) $invoice->id ) ); ?></div>
 				</div>
 				<span class="ezinv-status ezinv-status-<?php echo esc_attr( sanitize_html_class( (string) $invoice->status ) ); ?>"><?php echo esc_html( self::status_label( (string) $invoice->status ) ); ?></span>
 			</div>
@@ -77,7 +77,7 @@ final class EZINV_Invoice {
 
 			<?php if ( ! empty( $invoice->customer_name ) ) : ?>
 				<div class="ezinv-public-customer">
-					<span><?php echo esc_html__( 'Customer', 'easy-invoice-for-zarinpal' ); ?></span>
+					<span><?php echo esc_html__( 'Customer', 'tahanoa-invoice-links-for-zarinpal' ); ?></span>
 					<strong><?php echo esc_html( $invoice->customer_name ); ?></strong>
 				</div>
 			<?php endif; ?>
@@ -87,17 +87,17 @@ final class EZINV_Invoice {
 					<table class="ezinv-public-table">
 						<thead>
 							<tr>
-								<th><?php echo esc_html__( 'Product', 'easy-invoice-for-zarinpal' ); ?></th>
-								<th><?php echo esc_html__( 'Qty', 'easy-invoice-for-zarinpal' ); ?></th>
-								<th><?php echo esc_html__( 'Unit price', 'easy-invoice-for-zarinpal' ); ?></th>
-								<th><?php echo esc_html__( 'Total', 'easy-invoice-for-zarinpal' ); ?></th>
+								<th><?php echo esc_html__( 'Product', 'tahanoa-invoice-links-for-zarinpal' ); ?></th>
+								<th><?php echo esc_html__( 'Qty', 'tahanoa-invoice-links-for-zarinpal' ); ?></th>
+								<th><?php echo esc_html__( 'Unit price', 'tahanoa-invoice-links-for-zarinpal' ); ?></th>
+								<th><?php echo esc_html__( 'Total', 'tahanoa-invoice-links-for-zarinpal' ); ?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach ( $items as $item ) : ?>
 								<tr>
 									<td>
-										<strong><?php echo esc_html( isset( $item['name'] ) ? $item['name'] : __( 'Product', 'easy-invoice-for-zarinpal' ) ); ?></strong>
+										<strong><?php echo esc_html( isset( $item['name'] ) ? $item['name'] : __( 'Product', 'tahanoa-invoice-links-for-zarinpal' ) ); ?></strong>
 										<?php if ( ! empty( $item['sku'] ) ) : ?>
 											<small><?php echo esc_html( 'SKU: ' . $item['sku'] ); ?></small>
 										<?php endif; ?>
@@ -117,19 +117,19 @@ final class EZINV_Invoice {
 			<?php endif; ?>
 
 			<div class="ezinv-public-totals">
-				<div><span><?php echo esc_html__( 'Subtotal', 'easy-invoice-for-zarinpal' ); ?></span><strong><?php echo esc_html( self::format_toman( $invoice->subtotal_irr ) ); ?></strong></div>
+				<div><span><?php echo esc_html__( 'Subtotal', 'tahanoa-invoice-links-for-zarinpal' ); ?></span><strong><?php echo esc_html( self::format_toman( $invoice->subtotal_irr ) ); ?></strong></div>
 				<?php if ( (int) $invoice->shipping_irr > 0 ) : ?>
-					<div><span><?php echo esc_html__( 'Shipping', 'easy-invoice-for-zarinpal' ); ?></span><strong><?php echo esc_html( self::format_toman( $invoice->shipping_irr ) ); ?></strong></div>
+					<div><span><?php echo esc_html__( 'Shipping', 'tahanoa-invoice-links-for-zarinpal' ); ?></span><strong><?php echo esc_html( self::format_toman( $invoice->shipping_irr ) ); ?></strong></div>
 				<?php endif; ?>
-				<div class="ezinv-public-total"><span><?php echo esc_html__( 'Amount due', 'easy-invoice-for-zarinpal' ); ?></span><strong><?php echo esc_html( self::format_toman( $invoice->amount_irr ) ); ?></strong></div>
+				<div class="ezinv-public-total"><span><?php echo esc_html__( 'Amount due', 'tahanoa-invoice-links-for-zarinpal' ); ?></span><strong><?php echo esc_html( self::format_toman( $invoice->amount_irr ) ); ?></strong></div>
 			</div>
 
 			<?php if ( 'paid' === $invoice->status ) : ?>
 				<div class="ezinv-public-paid">
-					<?php echo esc_html__( 'This invoice has been paid successfully.', 'easy-invoice-for-zarinpal' ); ?>
+					<?php echo esc_html__( 'This invoice has been paid successfully.', 'tahanoa-invoice-links-for-zarinpal' ); ?>
 					<?php if ( ! empty( $invoice->ref_id ) ) : ?>
 						<br><small><?php echo esc_html( sprintf( /* translators: %s: gateway reference ID. */
-					__( 'Gateway reference: %s', 'easy-invoice-for-zarinpal' ), $invoice->ref_id ) ); ?></small>
+					__( 'Gateway reference: %s', 'tahanoa-invoice-links-for-zarinpal' ), $invoice->ref_id ) ); ?></small>
 					<?php endif; ?>
 				</div>
 			<?php elseif ( self::merchant_configured() ) : ?>
@@ -137,10 +137,10 @@ final class EZINV_Invoice {
 					<input type="hidden" name="action" value="ezinv_pay">
 					<input type="hidden" name="token" value="<?php echo esc_attr( $invoice->token ); ?>">
 					<?php wp_nonce_field( 'ezinv_pay_invoice_' . $invoice->token, 'ezinv_payment_nonce' ); ?>
-					<button class="ezinv-public-pay" type="submit"><?php echo esc_html__( 'Pay invoice online', 'easy-invoice-for-zarinpal' ); ?></button>
+					<button class="ezinv-public-pay" type="submit"><?php echo esc_html__( 'Pay invoice online', 'tahanoa-invoice-links-for-zarinpal' ); ?></button>
 				</form>
 			<?php else : ?>
-				<div class="ezinv-alert ezinv-alert-error"><?php echo esc_html__( 'The payment gateway has not been configured by the site administrator.', 'easy-invoice-for-zarinpal' ); ?></div>
+				<div class="ezinv-alert ezinv-alert-error"><?php echo esc_html__( 'The payment gateway has not been configured by the site administrator.', 'tahanoa-invoice-links-for-zarinpal' ); ?></div>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -155,23 +155,23 @@ final class EZINV_Invoice {
 	 */
 	public static function start_payment() {
 		if ( ! self::is_post_request() ) {
-			wp_die( esc_html__( 'Invalid request method.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 405 ) );
+			wp_die( esc_html__( 'Invalid request method.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 405 ) );
 		}
 
 		$token_raw = EZINV_Request::post_text( 'token' );
 		$token     = self::sanitize_token( $token_raw );
 		if ( '' === $token ) {
-			wp_die( esc_html__( 'Invalid invoice token.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 400 ) );
+			wp_die( esc_html__( 'Invalid invoice token.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 400 ) );
 		}
 
 		$nonce = EZINV_Request::post_text( 'ezinv_payment_nonce' );
 		if ( ! wp_verify_nonce( $nonce, 'ezinv_pay_invoice_' . $token ) ) {
-			wp_die( esc_html__( 'Security check failed. Please reload the invoice page and try again.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 403 ) );
+			wp_die( esc_html__( 'Security check failed. Please reload the invoice page and try again.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 403 ) );
 		}
 
 		$invoice = EZINV_DB::get_by_token( $token );
 		if ( ! $invoice ) {
-			wp_die( esc_html__( 'Invoice not found.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 404 ) );
+			wp_die( esc_html__( 'Invoice not found.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 404 ) );
 		}
 
 		if ( 'paid' === $invoice->status ) {
@@ -255,7 +255,7 @@ final class EZINV_Invoice {
 	 */
 	public static function callback() {
 		if ( ! self::is_get_request() ) {
-			wp_die( esc_html__( 'Invalid callback method.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 405 ) );
+			wp_die( esc_html__( 'Invalid callback method.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 405 ) );
 		}
 
 		$token_raw     = EZINV_Request::get_text( 'token' );
@@ -266,18 +266,18 @@ final class EZINV_Invoice {
 		$authority     = self::sanitize_authority( $authority_raw );
 
 		if ( '' === $token || ! in_array( strtoupper( $status ), array( 'OK', 'NOK' ), true ) || '' === $authority ) {
-			wp_die( esc_html__( 'Invalid payment callback.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 400 ) );
+			wp_die( esc_html__( 'Invalid payment callback.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 400 ) );
 		}
 
 		$invoice = EZINV_DB::get_by_token( $token );
 		if ( ! $invoice ) {
-			wp_die( esc_html__( 'Invoice not found.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 404 ) );
+			wp_die( esc_html__( 'Invoice not found.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 404 ) );
 		}
 
 		// Validate Authority before changing any local state, including cancellation.
 		if ( ! self::valid_authority( $invoice->authority ) || ! hash_equals( (string) $invoice->authority, $authority ) ) {
 			EZINV_Logger::log( 'warning', 'Callback Authority mismatch.', array( 'invoice_id' => (int) $invoice->id, 'operation' => 'callback' ) );
-			wp_die( esc_html__( 'The payment callback could not be authenticated.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 403 ) );
+			wp_die( esc_html__( 'The payment callback could not be authenticated.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 403 ) );
 		}
 
 		if ( 'paid' === $invoice->status ) {
@@ -326,24 +326,24 @@ final class EZINV_Invoice {
 	 */
 	public static function verify_invoice( $invoice ) {
 		if ( ! $invoice || empty( $invoice->id ) ) {
-			return new WP_Error( 'ezinv_invalid_invoice', esc_html__( 'Invalid invoice.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_invalid_invoice', esc_html__( 'Invalid invoice.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 		if ( 'paid' === $invoice->status ) {
 			return true;
 		}
 		if ( ! self::valid_authority( $invoice->authority ) || (int) $invoice->amount_irr < 1 ) {
-			return new WP_Error( 'ezinv_invalid_payment_state', esc_html__( 'Invoice payment state is incomplete.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_invalid_payment_state', esc_html__( 'Invoice payment state is incomplete.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 
 		$invoice_id = (int) $invoice->id;
 		if ( ! self::acquire_verification_lock( $invoice_id ) ) {
-			return new WP_Error( 'ezinv_verification_busy', esc_html__( 'Payment verification is already in progress.', 'easy-invoice-for-zarinpal' ) );
+			return new WP_Error( 'ezinv_verification_busy', esc_html__( 'Payment verification is already in progress.', 'tahanoa-invoice-links-for-zarinpal' ) );
 		}
 
 		try {
 			$invoice = EZINV_DB::get_by_id( $invoice_id );
 			if ( ! $invoice ) {
-				return new WP_Error( 'ezinv_invalid_invoice', esc_html__( 'Invoice not found.', 'easy-invoice-for-zarinpal' ) );
+				return new WP_Error( 'ezinv_invalid_invoice', esc_html__( 'Invoice not found.', 'tahanoa-invoice-links-for-zarinpal' ) );
 			}
 			if ( 'paid' === $invoice->status ) {
 				return true;
@@ -358,7 +358,7 @@ final class EZINV_Invoice {
 				array( '%s', '%s' )
 			);
 			if ( ! $marked_verifying ) {
-				return new WP_Error( 'ezinv_db_update_failed', esc_html__( 'The invoice payment state could not be updated. Please try again.', 'easy-invoice-for-zarinpal' ) );
+				return new WP_Error( 'ezinv_db_update_failed', esc_html__( 'The invoice payment state could not be updated. Please try again.', 'tahanoa-invoice-links-for-zarinpal' ) );
 			}
 
 			$result = EZINV_Gateway::verify_payment( $invoice );
@@ -397,7 +397,7 @@ final class EZINV_Invoice {
 				);
 				if ( ! $updated ) {
 					EZINV_Logger::log( 'error', 'Gateway verified payment but local paid state could not be stored.', array( 'invoice_id' => (int) $invoice->id, 'operation' => 'verify', 'gateway_code' => $code ) );
-					return new WP_Error( 'ezinv_db_update_failed', esc_html__( 'Payment was verified by the gateway, but the local invoice record could not be updated. Please re-verify from the admin.', 'easy-invoice-for-zarinpal' ) );
+					return new WP_Error( 'ezinv_db_update_failed', esc_html__( 'Payment was verified by the gateway, but the local invoice record could not be updated. Please re-verify from the admin.', 'tahanoa-invoice-links-for-zarinpal' ) );
 				}
 				EZINV_Logger::log( 'info', 'Invoice verified successfully.', array( 'invoice_id' => (int) $invoice->id, 'operation' => 'verify', 'gateway_code' => $code ) );
 				return true;
@@ -414,10 +414,10 @@ final class EZINV_Invoice {
 			);
 			if ( ! $failed_updated ) {
 				EZINV_Logger::log( 'error', 'Could not persist failed verification state.', array( 'invoice_id' => (int) $invoice->id, 'operation' => 'verify', 'gateway_code' => $code ) );
-				return new WP_Error( 'ezinv_db_update_failed', esc_html__( 'The invoice payment state could not be updated. Please try again.', 'easy-invoice-for-zarinpal' ) );
+				return new WP_Error( 'ezinv_db_update_failed', esc_html__( 'The invoice payment state could not be updated. Please try again.', 'tahanoa-invoice-links-for-zarinpal' ) );
 			}
 			EZINV_Logger::log( 'warning', 'Gateway rejected invoice verification.', array( 'invoice_id' => (int) $invoice->id, 'operation' => 'verify', 'gateway_code' => $code ) );
-			return new WP_Error( 'ezinv_gateway_rejected', EZINV_Gateway::error_message( $result, esc_html__( 'Payment could not be verified.', 'easy-invoice-for-zarinpal' ) ) );
+			return new WP_Error( 'ezinv_gateway_rejected', EZINV_Gateway::error_message( $result, esc_html__( 'Payment could not be verified.', 'tahanoa-invoice-links-for-zarinpal' ) ) );
 		} finally {
 			self::release_verification_lock( $invoice_id );
 		}
@@ -446,7 +446,7 @@ final class EZINV_Invoice {
 	public static function format_toman( $amount_irr ) {
 		$amount_irr = max( 0, (int) $amount_irr );
 		return /* translators: %s: formatted amount. */
-					sprintf( __( '%s Toman', 'easy-invoice-for-zarinpal' ), number_format_i18n( (int) round( $amount_irr / 10 ) ) );
+					sprintf( __( '%s Toman', 'tahanoa-invoice-links-for-zarinpal' ), number_format_i18n( (int) round( $amount_irr / 10 ) ) );
 	}
 
 	/**
@@ -569,7 +569,7 @@ final class EZINV_Invoice {
 	private static function redirect_to_gateway( $authority ) {
 		$authority = self::sanitize_authority( $authority );
 		if ( '' === $authority ) {
-			wp_die( esc_html__( 'Invalid payment Authority.', 'easy-invoice-for-zarinpal' ), '', array( 'response' => 400 ) );
+			wp_die( esc_html__( 'Invalid payment Authority.', 'tahanoa-invoice-links-for-zarinpal' ), '', array( 'response' => 400 ) );
 		}
 
 		add_filter( 'allowed_redirect_hosts', array( __CLASS__, 'allow_gateway_redirect_host' ), 10, 2 );
@@ -661,14 +661,14 @@ final class EZINV_Invoice {
 	 */
 	private static function status_label( $status ) {
 		$labels = array(
-			'pending'         => __( 'Pending', 'easy-invoice-for-zarinpal' ),
-			'waiting_payment' => __( 'Awaiting payment', 'easy-invoice-for-zarinpal' ),
-			'verifying'       => __( 'Verifying', 'easy-invoice-for-zarinpal' ),
-			'paid'            => __( 'Paid', 'easy-invoice-for-zarinpal' ),
-			'cancelled'       => __( 'Cancelled', 'easy-invoice-for-zarinpal' ),
-			'failed'          => __( 'Failed', 'easy-invoice-for-zarinpal' ),
+			'pending'         => __( 'Pending', 'tahanoa-invoice-links-for-zarinpal' ),
+			'waiting_payment' => __( 'Awaiting payment', 'tahanoa-invoice-links-for-zarinpal' ),
+			'verifying'       => __( 'Verifying', 'tahanoa-invoice-links-for-zarinpal' ),
+			'paid'            => __( 'Paid', 'tahanoa-invoice-links-for-zarinpal' ),
+			'cancelled'       => __( 'Cancelled', 'tahanoa-invoice-links-for-zarinpal' ),
+			'failed'          => __( 'Failed', 'tahanoa-invoice-links-for-zarinpal' ),
 		);
-		return isset( $labels[ $status ] ) ? $labels[ $status ] : __( 'Unknown', 'easy-invoice-for-zarinpal' );
+		return isset( $labels[ $status ] ) ? $labels[ $status ] : __( 'Unknown', 'tahanoa-invoice-links-for-zarinpal' );
 	}
 
 	/**
@@ -690,12 +690,12 @@ final class EZINV_Invoice {
 		}
 
 		$notices = array(
-			'success'       => array( 'success', __( 'Payment was verified successfully.', 'easy-invoice-for-zarinpal' ) ),
-			'cancelled'     => array( 'warning', __( 'Payment was cancelled or not completed.', 'easy-invoice-for-zarinpal' ) ),
-			'failed'        => array( 'error', __( 'The gateway did not verify this payment.', 'easy-invoice-for-zarinpal' ) ),
-			'gateway_error' => array( 'error', __( 'The payment gateway is temporarily unavailable. Please try again.', 'easy-invoice-for-zarinpal' ) ),
-			'verify_pending'=> array( 'warning', __( 'The payment result could not be confirmed yet. Please contact the site administrator before paying again.', 'easy-invoice-for-zarinpal' ) ),
-			'processing'    => array( 'warning', __( 'Payment verification is in progress. Please refresh this page shortly.', 'easy-invoice-for-zarinpal' ) ),
+			'success'       => array( 'success', __( 'Payment was verified successfully.', 'tahanoa-invoice-links-for-zarinpal' ) ),
+			'cancelled'     => array( 'warning', __( 'Payment was cancelled or not completed.', 'tahanoa-invoice-links-for-zarinpal' ) ),
+			'failed'        => array( 'error', __( 'The gateway did not verify this payment.', 'tahanoa-invoice-links-for-zarinpal' ) ),
+			'gateway_error' => array( 'error', __( 'The payment gateway is temporarily unavailable. Please try again.', 'tahanoa-invoice-links-for-zarinpal' ) ),
+			'verify_pending'=> array( 'warning', __( 'The payment result could not be confirmed yet. Please contact the site administrator before paying again.', 'tahanoa-invoice-links-for-zarinpal' ) ),
+			'processing'    => array( 'warning', __( 'Payment verification is in progress. Please refresh this page shortly.', 'tahanoa-invoice-links-for-zarinpal' ) ),
 		);
 
 		if ( ! isset( $notices[ $state ] ) ) {

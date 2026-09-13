@@ -60,7 +60,7 @@ WooCommerce is optional. The plugin can create manual-amount invoices without it
 ### Manual installation
 
 ```bash
-git clone https://github.com/Tahanoa/easy-zarinpal-invoice.git
+git clone https://github.com/Tahanoa/tahanoa-invoice-links-for-zarinpal.git
 ```
 
 Copy the `tahanoa-invoice-links-for-zarinpal` directory to `wp-content/plugins/`, then activate it from the WordPress dashboard.

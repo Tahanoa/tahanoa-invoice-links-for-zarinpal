@@ -1,6 +1,7 @@
 # Tahanoa Invoice Links for ZarinPal
 
-<img width="1672" height="941" alt="Tahanoa Invoice Links for ZarinPal" src="https://github.com/user-attachments/assets/82f7c275-00da-46e2-884a-a1f92f051615" />
+<img width="1672" height="941" alt="0bad9e63-2bc3-4834-9fbc-4875b06fc4d6" src="https://github.com/user-attachments/assets/84fe83ae-cc8a-4a77-9739-15e0c2951af7" />
+
 
 ![WordPress](https://img.shields.io/badge/WordPress-Plugin-blue)
 ![Version](https://img.shields.io/badge/version-1.5.9-green)
